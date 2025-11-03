@@ -22,7 +22,7 @@ struct MinHeap {
         size++;
 
         // in order to re-order
-        // upheap(idx, weightArr);
+        upheap(idx, weightArr);
     }
 
     int pop(int weightArr[]) {
@@ -38,7 +38,7 @@ struct MinHeap {
         size--;
 
         // Replace root with last element, then call downheap()
-        //downheap(0, weightArr);
+        downheap(0, weightArr);
         return minIndex;
         //return -1; // placeholder
     }
@@ -48,7 +48,7 @@ struct MinHeap {
         while(pos > 0) {
             int parent = (pos - 1) / 2;
             // probably works not testing right now
-            if(weightArr[data[pos]] > weightArr[data[parent]]) {
+            if(weightArr[data[pos]] < weightArr[data[parent]]) {
                 swap(data[pos], data[parent]);
                 pos = parent;
             }
@@ -64,8 +64,8 @@ struct MinHeap {
 
         }
 
-        int leftChild = 2 * pos;
-        int rightChild = 2 * pos + 1;
+        int leftChild = 2 * pos + 1;
+        int rightChild = 2 * pos + 2;
         int smallest = pos;
 
         //
