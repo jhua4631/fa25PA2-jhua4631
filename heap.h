@@ -22,7 +22,7 @@ struct MinHeap {
         size++;
 
         // in order to re-order
-        upheap(idx, weightArr);
+        //upheap(idx, weightArr);
     }
 
     int pop(int weightArr[]) {
@@ -38,7 +38,7 @@ struct MinHeap {
         size--;
 
         // Replace root with last element, then call downheap()
-        downheap(0, weightArr);
+        //downheap(0, weightArr);
         return minIndex;
         //return -1; // placeholder
     }

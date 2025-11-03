@@ -111,7 +111,7 @@ int buildEncodingTree(int nextFree) {
         // Push new parent index back into the heap
         bleh.push(nextFree, weightArr);
 
-        nextFree++;     
+        nextFree++;
 
     }
 
@@ -124,8 +124,29 @@ int buildEncodingTree(int nextFree) {
 void generateCodes(int root, string codes[]) {
     // TODO:
     // Use stack<pair<int, string>> to simulate DFS traversal.
-    // Left edge adds '0', right edge adds '1'.
-    // Record code when a leaf node is reached.
+    stack<pair<int, string>> st;
+    st.push({root, ""} );
+
+    while(!st.empty()) {
+        // auto shoould be like generic types i assume...
+        // (automatically corrects the data type i mean)
+        auto[node, code] = st.top();
+        st.pop();
+
+        // Record code when a leaf node is reached.
+        if(leftArr[node] == -1 && rightArr[node] == -1) {
+            int index = charArr[node] - 'a';
+            codes[index] = code;
+        } else {
+            // Left edge adds '0', right edge adds '1'.
+            if (rightArr[root] != -1) {
+                st.push(make_pair(root, codes[rightArr[root]]));
+            }
+            if (leftArr[root] != -1) {
+                st.push(make_pair(root, codes[leftArr[root]]));
+            }
+        }
+    }
 }
 
 // Step 5: Print table and encoded message
