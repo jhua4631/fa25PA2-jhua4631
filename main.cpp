@@ -23,6 +23,7 @@ void generateCodes(int root, string codes[]);
 void encodeMessage(const string& filename, string codes[]);
 
 int main() {
+    // replace input.txt with cybersecurity (after done with testing with banana)
     int freq[26] = {0};
 
     // Step 1: Read file and count letter frequencies
