@@ -42,7 +42,6 @@ int main() {
     // Step 5: Encode the message and print output
     encodeMessage("input.txt", codes);
 
-    return 0;
 }
 
 /*------------------------------------------------------
@@ -114,6 +113,7 @@ int buildEncodingTree(int nextFree) {
 
         nextFree++;
 
+
     }
 
     // 4. Return the index of the last remaining node (root)
@@ -129,10 +129,11 @@ void generateCodes(int root, string codes[]) {
     st.push({root, ""} );
 
     while(!st.empty()) {
-        // auto shoould be like generic types i assume...
-        // (automatically corrects the data type i mean)
-        auto[node, code] = st.top();
+        pair<int, string> topNode = st.top();
         st.pop();
+
+        int node = topNode.first;
+        string code = topNode.second;
 
         // Record code when a leaf node is reached.
         if(leftArr[node] == -1 && rightArr[node] == -1) {
@@ -140,11 +141,11 @@ void generateCodes(int root, string codes[]) {
             codes[index] = code;
         } else {
             // Left edge adds '0', right edge adds '1'.
-            if (rightArr[root] != -1) {
-                st.push(make_pair(root, codes[rightArr[root]]));
+            if (rightArr[node] != -1) {
+                st.push(make_pair(rightArr[node], code + "1"));
             }
-            if (leftArr[root] != -1) {
-                st.push(make_pair(root, codes[leftArr[root]]));
+            if (leftArr[node] != -1) {
+                st.push(make_pair(leftArr[node], code + "0"));
             }
         }
     }
